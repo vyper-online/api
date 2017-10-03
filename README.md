@@ -24,3 +24,9 @@ git submodule update
 
 Follow the instruction from the [viper docs](https://eth-viper.readthedocs.io/en/latest/installing-viper.html) for 
 installing viper into your virtualenv.
+
+The dev server on http://127.0.0.1:5000 can be started with:
+
+```
+python app.py
+```
