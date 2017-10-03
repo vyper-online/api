@@ -30,3 +30,20 @@ The dev server on http://127.0.0.1:5000 can be started with:
 ```
 python app.py
 ```
+
+## API Usage
+
+Endpoint: ``compile/``
+Methods: ``GET``, ``POST`` (recommended)
+
+Params:
+
+| Name          | Description           | Mandatory  |
+| ------------- |:---------------------:| ----------:|
+| source        | Viper source code     | yes        |
+
+Example request (with [HTTPie](https://httpie.org/)):
+
+```
+http --form POST http://127.0.0.1:5000/compile/ source='Some viper source code'
+```
