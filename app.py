@@ -1,6 +1,6 @@
 import json, logging, requests, sys
 from flask import Flask, jsonify, make_response, request
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 import viper
 from viper import compiler, optimizer
 from viper.parser import parse_to_lll
@@ -8,12 +8,13 @@ from viper.parser import parse_to_lll
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
-cors = CORS(app)
+CORS(app)
 
 COMPILE_ENDPOINT = '/compile/'
 
 
 @app.route(COMPILE_ENDPOINT, methods=['GET', 'POST'])
+@cross_origin()
 def compile():
     source = request.form.get('source', '')
     logging.info(type(source))
