@@ -17,24 +17,23 @@ COMPILE_ENDPOINT = '/compile/'
 @cross_origin()
 def compile():
     source = request.form.get('source', '')
-    logging.info(type(source))
     try:
         abi = compiler.mk_full_signature(source)
         abi_code = 200
-    except:
-        abi = "Could not be created"
+    except Exception as e:
+        abi = str(e)
         abi_code = 500
     try:
         json_abi = json.dumps(compiler.mk_full_signature(source))
         json_abi_code = 200
-    except:
-        json_abi = "Could not be created"
+    except Exception as e:
+        json_abi = str(e)
         json_abi_code = 500
     try:
         bytecode = '0x' + compiler.compile(source).hex()
         bytecode_code = 200
-    except:
-        bytecode = "Could not be created"
+    except Exception as e:
+        bytecode = str(e)
         bytecode_code = 500
     try:
         ir = "test"#optimizer.optimize(parse_to_lll(source))
