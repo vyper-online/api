@@ -36,7 +36,8 @@ def compile():
         bytecode = str(e)
         bytecode_code = 500
     try:
-        #ir = optimizer.optimize(parse_to_lll(source))
+        ir = optimizer.optimize(parse_to_lll(source))
+        ir = str(ir)
         ir_code = 200
     except Exception as e:
         ir = str(e)
@@ -48,7 +49,9 @@ def compile():
         'json': json_abi,
         'json_code': json_abi_code, 
         'bytecode': bytecode,
-        'bytecode_code': bytecode_code }
+        'bytecode_code': bytecode_code,
+        'lll': ir,
+        'lll_code': ir_code }
     }
     return make_response(jsonify(r_dict), 200)
 
