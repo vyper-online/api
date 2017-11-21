@@ -3,7 +3,7 @@ from flask import Flask, jsonify, make_response, request
 from flask_cors import CORS, cross_origin
 import viper
 from viper import compiler, optimizer
-from viper.parser import parse_to_lll
+from viper.parser.parser import parse_to_lll
 
 logging.basicConfig(level=logging.DEBUG)
 
