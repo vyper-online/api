@@ -1,44 +1,67 @@
-import json, logging, requests, sys
-from flask import Flask, jsonify, make_response, request
+import json, logging, os, requests, sys
+from flask import abort, Flask, jsonify, make_response, request
 from flask_cors import CORS, cross_origin
-import viper
-from viper import compiler, optimizer
-from viper.parser.parser import parse_to_lll
+import vyper
+from vyper import compiler, optimizer
+from vyper.parser.parser import parse_to_lll
+
+#sys.path.append(os.path.join(os.path.dirname(__file__), "viper_semantics"))
+
+#from viper_semantics.kviper import krun, viper2lll, lll2evm
+#from viper_semantics.scripts.viper_parser import main as parse
+#from viper_semantics.scripts.op2byte import encode as op2byte
 
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 CORS(app)
 
-COMPILE_ENDPOINT = '/compile/'
 
-
-@app.route(COMPILE_ENDPOINT, methods=['GET', 'POST'])
+@app.route('/<endpoint>/', methods=['GET', 'POST'])
 @cross_origin()
-def compile():
+def compile(endpoint):
+    if endpoint not in ['compile', 'compile-k']:
+        abort(500)
     source = request.form.get('source', '')
     try:
-        abi = compiler.mk_full_signature(source)
-        abi_code = 200
+        if endpoint == 'compile':
+            abi = compiler.mk_full_signature(source)
+            abi_code = 200
+        else:
+            raise Exception('Not available')
     except Exception as e:
         abi = str(e)
         abi_code = 500
     try:
-        json_abi = json.dumps(compiler.mk_full_signature(source))
-        json_abi_code = 200
+        if endpoint == 'compile':
+            json_abi = json.dumps(compiler.mk_full_signature(source))
+            json_abi_code = 200
+        else:
+            raise Exception('Not available')
     except Exception as e:
         json_abi = str(e)
         json_abi_code = 500
     try:
-        bytecode = '0x' + compiler.compile(source).hex()
-        bytecode_code = 200
+        if endpoint == 'compile':
+            bytecode = '0x' + compiler.compile(source).hex()
+            bytecode_code = 200
+        else:
+            raise Exception('Not available')
     except Exception as e:
         bytecode = str(e)
         bytecode_code = 500
     try:
-        ir = optimizer.optimize(parse_to_lll(source))
-        ir = str(ir)
-        ir_code = 200
+        if endpoint == 'compile':
+            ir = optimizer.optimize(parse_to_lll(source))
+            ir = str(ir)
+            ir_code = 200
+        else:
+            raise Exception('Not available')
+            #ast = parse(source)
+            #print("lala")
+            #print(ast)          
+            #ir = viper2lll(ast)
+            #ir_code = 200
     except Exception as e:
         ir = str(e)
         ir_code = 500

@@ -1,6 +1,3 @@
-[submodule "viper"]
-	path = viper
-	url = https://github.com/ethereum/viper.git
-[submodule "viper-semantics"]
-	path = viper-semantics
-	url = https://github.com/kframework/viper-semantics.git
+[submodule "vyper"]
+	path = vyper
+	url = https://github.com/ethereum/vyper.git

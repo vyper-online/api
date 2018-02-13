@@ -47,3 +47,9 @@ Example request (with [HTTPie](https://httpie.org/)):
 ```
 http --form POST http://127.0.0.1:5000/compile/ source='Some viper source code'
 ```
+
+Request from file:
+
+```
+http --form POST http://127.0.0.1:5000/compile/ source=@viper/examples/crowdfund.v.py
+```
