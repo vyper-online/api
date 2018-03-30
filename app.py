@@ -5,11 +5,11 @@ import vyper
 from vyper import compiler, optimizer
 from vyper.parser.parser import parse_to_lll
 
-#sys.path.append(os.path.join(os.path.dirname(__file__), "viper_semantics"))
+#sys.path.append(os.path.join(os.path.dirname(__file__), "vyper_semantics"))
 
-#from viper_semantics.kviper import krun, viper2lll, lll2evm
-#from viper_semantics.scripts.viper_parser import main as parse
-#from viper_semantics.scripts.op2byte import encode as op2byte
+#from vyper_semantics.kvyper import krun, vyper2lll, lll2evm
+#from vyper_semantics.scripts.vyper_parser import main as parse
+#from vyper_semantics.scripts.op2byte import encode as op2byte
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -60,7 +60,7 @@ def compile(endpoint):
             #ast = parse(source)
             #print("lala")
             #print(ast)          
-            #ir = viper2lll(ast)
+            #ir = vyper2lll(ast)
             #ir_code = 200
     except Exception as e:
         ir = str(e)
