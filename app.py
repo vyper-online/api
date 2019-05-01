@@ -43,7 +43,7 @@ def compile(endpoint):
         json_abi_code = 500
     try:
         if endpoint == 'compile':
-            bytecode = '0x' + compiler.compile(source).hex()
+            bytecode = compiler.compile_code(source)['bytecode']
             bytecode_code = 200
         else:
             raise Exception('Not available')
